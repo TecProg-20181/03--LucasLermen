@@ -19,10 +19,15 @@ class Words():
         return len(self.wordlist)
 
     def loadWordList(self):
-        print "Loading word list from file..."
+        print 'Loading word list from', WORDLIST_FILENAME ,'...'
+        try:
+            # inFile: file
+            self.inFile = open(WORDLIST_FILENAME, 'r',0)
+        except:
+            print 'Unable to open', WORDLIST_FILENAME
+            print 'Shuting down...'
+            exit(1)
 
-        # inFile: file
-        self.inFile = open(WORDLIST_FILENAME, 'r', 0)
         # line: string
         self.line = self.inFile.readline()
         self.wordlist = string.split(self.line)

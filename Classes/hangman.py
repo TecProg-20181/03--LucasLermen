@@ -1,4 +1,5 @@
 from os import system
+import string
 
 class Hangman():
     def __init__(self, secretWord, guesses):
@@ -33,7 +34,6 @@ class Hangman():
         return guessed
 
     def getAvailableLetters(self):
-        import string
         # 'abcdefghijklmnopqrstuvwxyz'
         available = string.ascii_lowercase
         for letter in available:
@@ -66,9 +66,12 @@ class Hangman():
             print 'You have ', self.guesses, 'guesses left.'
 
             print 'Available letters', self.getAvailableLetters()
-            letter = raw_input('Please guess a letter: ')
 
-            print self.resultLetter(letter)
+            letter = raw_input('Please guess a letter: ')
+            while letter.isalpha() == False:
+                letter = raw_input('This is not a letter, please guess a letter: ')
+
+            print self.resultLetter(letter.lower())
 
             print '--------------------------------------------------'
 
