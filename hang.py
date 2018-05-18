@@ -7,10 +7,23 @@ logging.basicConfig(filename='hang.log', format='%(asctime)s %(message)s', level
 def main():
     playerGuesses = 8
 
-    words = Words(playerGuesses)
+    try:
+        words = Words(playerGuesses)
+        logging.info('Created words object')
+    except:
+        print 'Unable to create words object'
+        print 'Shutting down...'
+        exit(1)
+
     secretWord = words.chooseWord().lower()
 
-    hangman = Hangman(secretWord, playerGuesses)
+    try:
+        hangman = Hangman(secretWord, playerGuesses)
+        logging.info('Created hangman object')
+    except:
+        print 'Unable to create hangman object'
+        print 'Shutting down...'
+        exit(1)
 
     hangman.printHeader(words)
     hangman.startGame()

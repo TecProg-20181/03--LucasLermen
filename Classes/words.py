@@ -27,7 +27,7 @@ class Words():
             logging.info('Words file opened')
         except:
             print 'Unable to open', WORDLIST_FILENAME
-            print 'Shuting down...'
+            print 'Shutting down...'
             exit(1)
 
         # line: string
