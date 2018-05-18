@@ -1,5 +1,6 @@
 from os import system
 import string
+import logging
 
 class Hangman():
     def __init__(self, secretWord, guesses):
@@ -56,12 +57,14 @@ class Hangman():
         return 'Oops! That letter is not in my word: ' + guessed
 
     def gameResult(self):
+        logging.info('Game ended')
         if self.isWordGuessed():
             return 'Congratulations, you won!'
         else:
             return 'Sorry, you ran out of guesses. The word was ' + self.secretWord + '.'
 
     def startGame(self):
+        logging.info('Game started')
         while self.isWordGuessed() == False and self.guesses >0:
             print 'You have ', self.guesses, 'guesses left.'
 
@@ -69,6 +72,7 @@ class Hangman():
 
             letter = raw_input('Please guess a letter: ')
             while letter.isalpha() == False:
+                logging.error('Invalid input')
                 letter = raw_input('This is not a letter, please guess a letter: ')
 
             print self.resultLetter(letter.lower())

@@ -1,12 +1,19 @@
+import logging
 from Classes.words import Words
 from Classes.hangman import Hangman
 
-playerGuesses = 8
+logging.basicConfig(filename='hang.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
-words = Words(playerGuesses)
-secretWord = words.chooseWord().lower()
+def main():
+    playerGuesses = 8
 
-hangman = Hangman(secretWord, playerGuesses)
+    words = Words(playerGuesses)
+    secretWord = words.chooseWord().lower()
 
-hangman.printHeader(words)
-hangman.startGame()
+    hangman = Hangman(secretWord, playerGuesses)
+
+    hangman.printHeader(words)
+    hangman.startGame()
+
+if __name__ == '__main__':
+    main()

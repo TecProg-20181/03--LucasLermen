@@ -1,5 +1,6 @@
 import random
 import string
+import logging
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -23,6 +24,7 @@ class Words():
         try:
             # inFile: file
             self.inFile = open(WORDLIST_FILENAME, 'r',0)
+            logging.info('Words file opened')
         except:
             print 'Unable to open', WORDLIST_FILENAME
             print 'Shuting down...'
@@ -34,6 +36,10 @@ class Words():
 
         print self.wordListSize(), "words loaded."
 
+    def closeFile(self):
+        self.inFile.close()
+        logging.info('Words file closed')
+
     def printChangingInfo(self):
         print '---------------------------------------'
         print 'You have only', self.guesses,'guesses'
@@ -41,6 +47,7 @@ class Words():
         print 'Changing word...'
 
     def differentLetters(self):
+        logging.info('Counting different letters')
         self.wordDifLetters = []
         for letter in self.chosenWord:
             if letter in self.wordDifLetters:
@@ -49,6 +56,7 @@ class Words():
                 self.wordDifLetters.append(letter)
 
     def randomWord(self):
+        logging.info('Selecting random word')
         self.chosenWord = random.choice(self.wordlist)
         self.differentLetters()
 
@@ -60,4 +68,6 @@ class Words():
             self.printChangingInfo()
             self.randomWord()
 
+        logging.info('Word chosen')
+        self.closeFile()
         return self.chosenWord
